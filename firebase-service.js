@@ -70,7 +70,6 @@ class FirebaseService {
 
     try {
       this.unsubscribe = this.db.collection(this.collectionName)
-        .orderBy('score', 'desc')
         .onSnapshot((snapshot) => {
           const records = [];
           snapshot.forEach(doc => {
@@ -79,6 +78,7 @@ class FirebaseService {
               ...doc.data()
             });
           });
+          records.sort((a, b) => (b.score || 0) - (a.score || 0));
           onUpdate(records);
         }, (error) => {
           console.error('Firestore 실시간 동기화 오류:', error);

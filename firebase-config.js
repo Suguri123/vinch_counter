@@ -1,6 +1,3 @@
-// Firebase Configuration for Vinci Counter
-// 프로젝트: vinci-counter
-
 const defaultFirebaseConfig = {
   apiKey: "AIzaSyCHXLfgEbRB8B3ZBhfJVDi_78XHBLp4ueM",
   authDomain: "vinci-counter.firebaseapp.com",
@@ -11,20 +8,6 @@ const defaultFirebaseConfig = {
   measurementId: "G-02YENGJ1J4"
 };
 
-// 로컬 저장소에 커스텀 설정이 있다면 우선 사용, 없으면 위 기본 설정 사용
-function getFirebaseConfig() {
-  try {
-    const saved = localStorage.getItem('vincibot_firebase_config');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.apiKey && parsed.apiKey !== 'YOUR_API_KEY_HERE') {
-        return parsed;
-      }
-    }
-  } catch (e) {
-    console.warn('Firebase 설정 로드 실패:', e);
-  }
-  return defaultFirebaseConfig;
-}
+// 항상 설정된 Firebase 구성을 기본으로 사용
+window.firebaseConfig = defaultFirebaseConfig;
 
-window.firebaseConfig = getFirebaseConfig();

@@ -436,6 +436,9 @@ class BasketballLeaderboard {
         this.records.push(newRecord);
         this.saveRecords();
         this.render();
+        this.closeModal(this.addModal);
+        this.showToast('⚠️ 클라우드 저장 실패! (Firestore 규칙에서 쓰기를 허용해주세요)', 'error');
+        return;
       }
     } else {
       newRecord.id = 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
