@@ -605,7 +605,10 @@ class BasketballLeaderboard {
         <td class="td-rank">${rankDisplay}</td>
         <td class="td-name">
           <div class="player-info-cell">
-            <span class="cell-avatar">${item.rank === 1 ? '👑' : '🤖'}</span>
+            <span class="cell-avatar" style="position: relative;">
+              ${item.rank === 1 ? '<span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 14px; z-index: 2;">👑</span>' : ''}
+              <img src="vincibot.png" alt="빈치봇">
+            </span>
             <span class="cell-name">${this.escapeHtml(item.name)}</span>
           </div>
         </td>

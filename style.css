@@ -492,40 +492,60 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   position: relative;
   backdrop-filter: blur(12px);
 }
 
 .rank-badge {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 4px 12px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 6px 18px;
   border-radius: var(--radius-full);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
 }
 
 .medal-icon {
-  font-size: 2.2rem;
-  margin-top: 2px;
+  font-size: 4.2rem;
+  margin: 4px 0;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  animation: medalGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes medalGlow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 .player-avatar {
-  width: 56px;
+  width: 72px;
   height: 56px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
   margin: 4px 0;
   border: 2px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  padding: 2px;
+}
+
+.player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.vincibot-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .player-name {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #ffffff;
   max-width: 90%;
@@ -535,7 +555,7 @@ body {
 }
 
 .player-score {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
   display: flex;
@@ -544,21 +564,21 @@ body {
 }
 
 .player-score .unit {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--text-sub);
 }
 
 .player-date {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
 
 .player-comment {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-sub);
   background: rgba(0, 0, 0, 0.25);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
   max-width: 95%;
   overflow: hidden;
@@ -574,10 +594,11 @@ body {
   justify-content: center;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   font-weight: 900;
-  font-size: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 5.0rem;
+  color: rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 .podium-pillar::before {
@@ -625,28 +646,27 @@ body {
 }
 
 .avatar-first {
-  width: 68px;
+  width: 88px;
   height: 68px;
-  font-size: 32px;
   border-color: var(--gold);
-  box-shadow: 0 0 20px var(--gold-glow);
+  box-shadow: 0 0 25px var(--gold-glow);
   background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 0, 0.2));
 }
 
 .first-name {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   color: #fff9e6;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .first-score {
-  font-size: 2.6rem;
+  font-size: 3.2rem;
   color: var(--gold);
   text-shadow: 0 0 15px var(--gold-glow);
 }
 
 .pillar-1 {
-  height: 150px;
+  height: 165px;
   background: linear-gradient(180deg, rgba(255, 215, 0, 0.35) 0%, rgba(255, 107, 0, 0.15) 100%);
   border: 2px solid var(--gold);
   border-top: none;
@@ -674,7 +694,7 @@ body {
 }
 
 .pillar-2 {
-  height: 105px;
+  height: 120px;
   background: linear-gradient(180deg, rgba(224, 224, 224, 0.25) 0%, rgba(100, 116, 139, 0.1) 100%);
   border: 1.5px solid var(--silver);
   border-top: none;
@@ -701,7 +721,7 @@ body {
 }
 
 .pillar-3 {
-  height: 75px;
+  height: 90px;
   background: linear-gradient(180deg, rgba(205, 127, 50, 0.25) 0%, rgba(100, 116, 139, 0.1) 100%);
   border: 1.5px solid var(--bronze);
   border-top: none;
@@ -832,7 +852,7 @@ body {
 }
 
 .th-rank, .td-rank {
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 
@@ -840,11 +860,11 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 900;
+  font-size: 1.4rem;
   background: rgba(255, 255, 255, 0.07);
   color: var(--text-sub);
 }
@@ -857,7 +877,8 @@ body {
 .row-rank-1 .rank-number-badge {
   background: var(--gold);
   color: #1a1000;
-  box-shadow: 0 0 10px var(--gold-glow);
+  box-shadow: 0 0 14px var(--gold-glow);
+  font-size: 1.7rem;
 }
 
 .row-rank-2 {
@@ -867,6 +888,8 @@ body {
 .row-rank-2 .rank-number-badge {
   background: var(--silver);
   color: #0f172a;
+  box-shadow: 0 0 10px var(--silver-glow);
+  font-size: 1.7rem;
 }
 
 .row-rank-3 {
@@ -876,16 +899,29 @@ body {
 .row-rank-3 .rank-number-badge {
   background: var(--bronze);
   color: #ffffff;
+  box-shadow: 0 0 10px var(--bronze-glow);
+  font-size: 1.7rem;
 }
 
 .player-info-cell {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .cell-avatar {
-  font-size: 1.4rem;
+  width: 46px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cell-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cell-name {
