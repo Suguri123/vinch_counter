@@ -153,27 +153,31 @@ body {
 
 .logo-icon-wrapper {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.25), rgba(0, 210, 255, 0.25));
   border: 1px solid rgba(255, 107, 0, 0.5);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 34px;
-  box-shadow: 0 0 20px var(--primary-orange-glow);
+  padding: 3px;
+  box-shadow: 0 0 15px var(--primary-orange-glow);
+  flex-shrink: 0;
 }
 
 .robot-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   animation: robotBounce 2.5s ease-in-out infinite;
 }
 
 .ball-icon {
   position: absolute;
-  font-size: 18px;
-  bottom: -4px;
-  right: -4px;
+  font-size: 13px;
+  bottom: -3px;
+  right: -3px;
   animation: ballSpin 3s linear infinite;
 }
 
