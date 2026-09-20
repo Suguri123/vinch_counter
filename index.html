@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>빈치봇 농구 챌린지 - 명예의 전당</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  
+  <!-- Firebase SDK (Compat v10 for browser direct usage) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="court-background">
+    <div class="court-overlay"></div>
+    <div class="court-line court-center-circle"></div>
+    <div class="court-line court-key-left"></div>
+    <div class="court-line court-key-right"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+      <div class="logo-area">
+        <div class="logo-icon-wrapper">
+          <span class="robot-icon">🤖</span>
+          <span class="ball-icon">🏀</span>
+        </div>
+        <div class="logo-text">
+          <h1>빈치봇 농구 챌린지</h1>
+          <div class="subtitle-wrap">
+            <span class="sub-title">VinciBot Basketball Hall of Fame</span>
+            <span class="cloud-status-badge" id="cloudStatusBadge" title="Firebase 연동 상태">
+              <span class="status-dot"></span>
+              <span class="status-text">로컬 모드</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 실시간 라이브 시계 -->
+      <div class="clock-display" id="clockDisplay">
+        <div class="clock-date" id="clockDate">2026.09.20 (SUN)</div>
+        <div class="clock-time" id="clockTime">00:00:00</div>
+      </div>
+
+      <!-- 컨트롤 버튼들 -->
+      <div class="header-actions">
+        <button id="soundToggleBtn" class="btn btn-icon" title="효과음 켜기/끄기">
+          <span class="icon">🔊</span>
+        </button>
+        <button id="fullscreenBtn" class="btn btn-icon" title="전체화면 모드">
+          <span class="icon">⛶</span>
+        </button>
+        <button id="settingsBtn" class="btn btn-icon" title="데이터 관리 / 설정">
+          <span class="icon">⚙️</span>
+        </button>
+        <button id="openAddModalBtn" class="btn btn-primary pulse-btn">
+          <span class="icon">➕</span>
+          <span>기록 등록하기</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 메인 대시보드 -->
+    <main class="dashboard-main">
+      <!-- TOP 3 포디움 (시상대) -->
+      <section class="podium-section">
+        <div class="section-title-wrap">
+          <span class="trophy-lead">🏆</span>
+          <h2>TOP 3 명예의 전당</h2>
+          <span class="badge live-badge">LIVE LEADERBOARD</span>
+        </div>
+
+        <div class="podium-container" id="podiumContainer">
+          <!-- 2위 (은메달) -->
+          <div class="podium-item podium-second" id="podium2">
+            <div class="podium-card">
+              <div class="rank-badge rank-2">2nd</div>
+              <div class="medal-icon">🥈</div>
+              <div class="player-avatar">🤖</div>
+              <div class="player-name" id="podium2-name">-</div>
+              <div class="player-score" id="podium2-score">0 <span class="unit">점</span></div>
+              <div class="player-date" id="podium2-date">-</div>
+              <div class="player-comment" id="podium2-comment">대기 중...</div>
+            </div>
+            <div class="podium-pillar pillar-2">
+              <span class="pillar-rank">2</span>
+            </div>
+          </div>
+
+          <!-- 1위 (금메달 - 중앙 최상단) -->
+          <div class="podium-item podium-first" id="podium1">
+            <div class="crown-glow">👑</div>
+            <div class="podium-card card-first">
+              <div class="rank-badge rank-1">1st Champion</div>
+              <div class="medal-icon">🥇</div>
+              <div class="player-avatar avatar-first">🤖✨</div>
+              <div class="player-name first-name" id="podium1-name">-</div>
+              <div class="player-score first-score" id="podium1-score">0 <span class="unit">점</span></div>
+              <div class="player-date" id="podium1-date">-</div>
+              <div class="player-comment" id="podium1-comment">최고 득점자에 도전하세요!</div>
+            </div>
+            <div class="podium-pillar pillar-1">
+              <span class="pillar-rank">1</span>
+            </div>
+          </div>
+
+          <!-- 3위 (동메달) -->
+          <div class="podium-item podium-third" id="podium3">
+            <div class="podium-card">
+              <div class="rank-badge rank-3">3rd</div>
+              <div class="medal-icon">🥉</div>
+              <div class="player-avatar">🤖</div>
+              <div class="player-name" id="podium3-name">-</div>
+              <div class="player-score" id="podium3-score">0 <span class="unit">점</span></div>
+              <div class="player-date" id="podium3-date">-</div>
+              <div class="player-comment" id="podium3-comment">대기 중...</div>
+            </div>
+            <div class="podium-pillar pillar-3">
+              <span class="pillar-rank">3</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 전체 순위표 테이블 & 필터 -->
+      <section class="table-section">
+        <div class="table-header-bar">
+          <div class="table-title">
+            <h3>📊 전체 참가자 순위표</h3>
+            <span class="participant-count" id="totalCountBadge">총 0명 참가</span>
+          </div>
+          
+          <div class="table-controls">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="searchInput" placeholder="이름 검색..." autocomplete="off">
+            </div>
+            <div class="sort-select-wrap">
+              <select id="sortSelect">
+                <option value="score-desc">점수 높은 순</option>
+                <option value="score-asc">점수 낮은 순</option>
+                <option value="date-desc">최신 등록 순</option>
+                <option value="date-asc">오래된 순</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="ranking-table">
+            <thead>
+              <tr>
+                <th class="th-rank">순위</th>
+                <th class="th-name">이름 (선수명)</th>
+                <th class="th-score">득점 (점수)</th>
+                <th class="th-comment">한마디</th>
+                <th class="th-date">등록 시간</th>
+                <th class="th-actions">관리</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody">
+              <!-- JS에서 동적으로 렌더링 -->
+            </tbody>
+          </table>
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">🏀🤖</div>
+            <p class="empty-text">아직 등록된 기록이 없습니다.</p>
+            <p class="empty-sub">상단의 [기록 등록하기] 버튼을 눌러 첫 번째 명예의 전당 주인공이 되어보세요!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 하단 푸터 바 -->
+    <footer class="main-footer">
+      <div class="ticker-wrap">
+        <div class="ticker-badge">NOTICE</div>
+        <div class="ticker-text" id="tickerText">
+          🤖 빈치봇으로 멋진 슛을 던져보세요! 림을 통과하면 골인! 최고 득점에 도전하세요! 🏀🔥
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 기록 등록 모달 -->
+  <div class="modal-backdrop" id="addModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="icon">🏀</span>
+          <h3>새로운 기록 등록</h3>
+        </div>
+        <button class="modal-close" id="closeAddModalBtn">&times;</button>
+      </div>
+
+      <form id="recordForm" class="modal-body">
+        <div class="form-group">
+          <label for="playerName">선수 이름 / 닉네임 <span class="required">*</span></label>
+          <input type="text" id="playerName" placeholder="예: 김빈치, 로봇왕 등" required maxlength="20" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="playerScore">획득 점수 <span class="required">*</span></label>
+          <div class="score-input-wrapper">
+            <button type="button" class="btn-step" id="btnScoreMinus">-</button>
+            <input type="number" id="playerScore" value="0" min="0" max="9999" required>
+            <button type="button" class="btn-step" id="btnScorePlus">+</button>
+          </div>
+          <!-- 빠른 점수 추가 버튼 -->
+          <div class="quick-score-buttons">
+            <span class="quick-label">빠른 추가:</span>
+            <button type="button" class="btn-chip" data-add="1">+1점</button>
+            <button type="button" class="btn-chip" data-add="2">+2점 (야투)</button>
+            <button type="button" class="btn-chip" data-add="3">+3점 (3점슛)</button>
+            <button type="button" class="btn-chip" data-add="5">+5점</button>
+            <button type="button" class="btn-chip reset-chip" id="btnScoreReset">초기화</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="playerComment">소감 / 한마디 (선택)</label>
+          <input type="text" id="playerComment" placeholder="예: 빈치봇 슛 감각 최고네요!" maxlength="50" autocomplete="off">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelAddBtn">취소</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="icon">🏆</span>
+            <span>명예의 전당 등록</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 설정 및 데이터 관리 모달 -->
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="icon">⚙️</span>
+          <h3>데이터 관리 및 설정</h3>
+        </div>
+        <button class="modal-close" id="closeSettingsModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body settings-body">
+        <!-- Firebase 설정 구역 -->
+        <div class="setting-item firebase-config-box">
+          <div class="setting-info" style="width: 100%;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span class="setting-title">🔥 Firebase 실시간 클라우드 연동</span>
+              <span class="badge" id="firebaseModalStatusBadge">로컬 모드</span>
+            </div>
+            <span class="setting-desc" style="margin-bottom: 12px; display: block;">
+              프로젝트: <strong>vinci-counter</strong> (여러 스마트폰/PC에서 실시간으로 점수를 동기화합니다)
+            </span>
+            <div class="firebase-inputs" id="firebaseInputsArea">
+              <input type="text" id="fbApiKey" placeholder="Firebase API Key (예: AIzaSy...)" class="setting-input">
+              <input type="text" id="fbProjectId" value="vinci-counter" placeholder="Project ID (기본: vinci-counter)" class="setting-input">
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button type="button" class="btn btn-primary" id="saveFirebaseConfigBtn" style="flex: 1; padding: 8px 12px; font-size: 0.88rem;">
+                  Firebase 연결 저장 및 동기화
+                </button>
+                <button type="button" class="btn btn-secondary" id="resetFirebaseConfigBtn" style="padding: 8px 12px; font-size: 0.88rem;">
+                  연결 해제
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-title">샘플 데이터 채우기</span>
+            <span class="setting-desc">테스트를 위한 가상 참가자 10명의 데이터를 생성합니다.</span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="loadSampleDataBtn">샘플 로드</button>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-title">데이터 백업 (내보내기)</span>
+            <span class="setting-desc">현재 순위표 기록을 JSON 파일로 내 컴퓨터에 다운로드합니다.</span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="exportDataBtn">JSON 다운로드</button>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-title">데이터 복원 (가져오기)</span>
+            <span class="setting-desc">백업해둔 JSON 파일을 불러와 순위표를 복원합니다.</span>
+          </div>
+          <div>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+            <button type="button" class="btn btn-secondary" id="importDataBtn">파일 선택</button>
+          </div>
+        </div>
+
+        <div class="setting-item danger-item">
+          <div class="setting-info">
+            <span class="setting-title">전체 데이터 초기화</span>
+            <span class="setting-desc">저장된 모든 참가자 및 점수 기록을 완전히 삭제합니다.</span>
+          </div>
+          <button type="button" class="btn btn-danger" id="clearAllDataBtn">전체 삭제</button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="closeSettingsBtn">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 커스텀 알림/축하 토스트 & 팝업 컨테이너 -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- 스크립트 로드 -->
+  <script src="firebase-config.js"></script>
+  <script src="firebase-service.js"></script>
+  <script src="confetti.js"></script>
+  <script src="sounds.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
