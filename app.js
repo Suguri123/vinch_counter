@@ -1,5 +1,5 @@
 /**
- * 빈치봇 농구 챌린지 - 명예의 전당 (VinciBot Basketball Hall of Fame)
+ * 빈치봇 슈팅게임 - 명예의 전당 (VinciBot Shooting Game Hall of Fame)
  * Application Logic
  */
 
@@ -70,7 +70,7 @@ class BasketballLeaderboard {
 
     // 시작 시 안내
     if (this.records.length === 0) {
-      this.showToast('빈치봇 명예의 전당에 오신 것을 환영합니다! 기록을 등록해보세요.', 'info');
+      this.showToast('빈치봇 슈팅게임 명예의 전당에 오신 것을 환영합니다! 기록을 등록해보세요.', 'info');
     }
   }
 
@@ -422,7 +422,7 @@ class BasketballLeaderboard {
     const newRecord = {
       name: name,
       score: score,
-      comment: comment || '빈치봇 농구 챌린지 참가!',
+      comment: comment || '빈치봇 슈팅게임 참가!',
       timestamp: Date.now()
     };
 
