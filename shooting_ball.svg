@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- 공 3D 구체 그라디언트 (레드/오렌지 베이스) -->
+    <radialGradient id="ballGrad" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#ff7b7b"/>
+      <stop offset="25%" stop-color="#ee3838"/>
+      <stop offset="60%" stop-color="#c61a1a"/>
+      <stop offset="100%" stop-color="#7a0a0a"/>
+    </radialGradient>
+
+    <!-- 벨크로 흰색 띠 그라디언트 (빛 반사 및 입체감) -->
+    <linearGradient id="tapeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+
+    <linearGradient id="tapeGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+
+    <!-- 벨크로(찍찍이) 격자 질감 패턴 -->
+    <pattern id="velcroTexture" width="3" height="3" patternUnits="userSpaceOnUse">
+      <path d="M 0 1.5 L 3 1.5 M 1.5 0 L 1.5 3" stroke="#94a3b8" stroke-width="0.5" opacity="0.65"/>
+    </pattern>
+
+    <!-- 공 구체 클리핑 마스크 -->
+    <clipPath id="ballClip">
+      <circle cx="50" cy="50" r="46"/>
+    </clipPath>
+
+    <!-- 부드러운 하이라이트 광택 -->
+    <radialGradient id="glossGrad" cx="30%" cy="25%" r="35%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 하단 그림자 필터 -->
+    <filter id="ballShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- 메인 구체 (그림자 포함) -->
+  <g filter="url(#ballShadow)">
+    <circle cx="50" cy="50" r="46" fill="url(#ballGrad)"/>
+  </g>
+
+  <!-- 볼 내부 십자 벨크로 띠 (클립 적용) -->
+  <g clip-path="url(#ballClip)">
+    <!-- 1번 벨크로 띠 (좌상 -> 우하 교차 곡선) -->
+    <path d="M 12 16 Q 50 44 88 84 L 80 94 Q 42 54 4 26 Z" fill="url(#tapeGrad1)"/>
+    <path d="M 12 16 Q 50 44 88 84 L 80 94 Q 42 54 4 26 Z" fill="url(#velcroTexture)"/>
+    <path d="M 12 16 Q 50 44 88 84" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.8"/>
+    <path d="M 4 26 Q 42 54 80 94" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.5"/>
+
+    <!-- 2번 벨크로 띠 (우상 -> 좌하 교차 곡선) -->
+    <path d="M 88 16 Q 50 44 12 84 L 4 74 Q 42 34 80 6 Z" fill="url(#tapeGrad2)"/>
+    <path d="M 88 16 Q 50 44 12 84 L 4 74 Q 42 34 80 6 Z" fill="url(#velcroTexture)"/>
+    <path d="M 80 6 Q 42 34 4 74" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.8"/>
+    <path d="M 88 16 Q 50 44 12 84" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.5"/>
+
+    <!-- 가로 가이드 띠 (약간 둥근 입체 띠) -->
+    <path d="M 4 44 Q 50 60 96 44 L 96 56 Q 50 72 4 56 Z" fill="url(#tapeGrad1)" opacity="0.95"/>
+    <path d="M 4 44 Q 50 60 96 44 L 96 56 Q 50 72 4 56 Z" fill="url(#velcroTexture)"/>
+    <path d="M 4 44 Q 50 60 96 44" stroke="#ffffff" stroke-width="0.8" fill="none" opacity="0.8"/>
+    <path d="M 4 56 Q 50 72 96 56" stroke="#64748b" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+    <!-- 구체 상단 입체 하이라이트 광택 -->
+    <ellipse cx="38" cy="30" rx="22" ry="16" fill="url(#glossGrad)"/>
+  </g>
+
+  <!-- 테두리 하이라이트 림 -->
+  <circle cx="50" cy="50" r="45.5" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/>
+</svg>

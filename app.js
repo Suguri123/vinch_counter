@@ -613,7 +613,7 @@ class BasketballLeaderboard {
           </div>
         </td>
         <td class="td-score">
-          <span class="score-icon">🏀</span>${item.score.toLocaleString()}<span class="score-unit">점</span>
+          <img src="shooting_ball.svg" class="score-ball-icon" alt="슈팅볼">${item.score.toLocaleString()}<span class="score-unit">점</span>
         </td>
         <td class="td-comment" title="${this.escapeHtml(item.comment)}">
           ${this.escapeHtml(item.comment || '-')}
