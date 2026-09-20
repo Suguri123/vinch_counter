@@ -1326,6 +1326,63 @@ body {
   padding: 8px 16px;
 }
 
+/* ================= 관리자 비밀번호 확인 모달 ================= */
+.password-modal-card {
+  max-width: 400px;
+  text-align: center;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.password-modal-body {
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+}
+
+.password-guide-text {
+  font-size: 0.95rem;
+  color: var(--text-sub);
+  line-height: 1.4;
+}
+
+.password-input-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.password-input {
+  text-align: center;
+  font-size: 1.6rem;
+  letter-spacing: 8px;
+  padding: 10px 16px;
+  width: 220px;
+  font-weight: 800;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.password-input:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+}
+
+.password-error-msg {
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* 비밀번호 오류 시 흔들림 애니메이션 */
+.shake {
+  animation: shakeAnimation 0.4s ease-in-out;
+}
+
+@keyframes shakeAnimation {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
 /* 토스트 알림 */
 .toast-container {
   position: fixed;

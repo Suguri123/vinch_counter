@@ -35,6 +35,17 @@ class BasketballLeaderboard {
     this.copyUrlBtn = document.getElementById('copyUrlBtn');
     this.qrUrlInput = document.getElementById('qrUrlInput');
 
+    // Admin Password Elements
+    this.ADMIN_PASSWORD = '1234';
+    this.pendingAction = null;
+    this.passwordModal = document.getElementById('passwordModal');
+    this.passwordForm = document.getElementById('passwordForm');
+    this.adminPasswordInput = document.getElementById('adminPasswordInput');
+    this.passwordActionDesc = document.getElementById('passwordActionDesc');
+    this.passwordErrorMsg = document.getElementById('passwordErrorMsg');
+    this.closePasswordModalBtn = document.getElementById('closePasswordModalBtn');
+    this.cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+
     // Record Form Elements
     this.recordForm = document.getElementById('recordForm');
     this.playerNameInput = document.getElementById('playerName');
@@ -223,6 +234,41 @@ class BasketballLeaderboard {
       this.closeQrBtn.addEventListener('click', () => this.closeModal(this.qrModal));
     }
 
+    // 관리자 비밀번호 확인 폼 제출
+    if (this.passwordForm) {
+      this.passwordForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputPw = this.adminPasswordInput.value.trim();
+        if (inputPw === this.ADMIN_PASSWORD) {
+          this.closeModal(this.passwordModal);
+          if (typeof this.pendingAction === 'function') {
+            this.pendingAction();
+          }
+          this.pendingAction = null;
+        } else {
+          this.passwordErrorMsg.style.display = 'block';
+          this.adminPasswordInput.classList.add('shake');
+          setTimeout(() => this.adminPasswordInput.classList.remove('shake'), 400);
+          if (window.soundManager) window.soundManager.playWhistle();
+          this.adminPasswordInput.value = '';
+          this.adminPasswordInput.focus();
+        }
+      });
+    }
+
+    if (this.closePasswordModalBtn) {
+      this.closePasswordModalBtn.addEventListener('click', () => {
+        this.closeModal(this.passwordModal);
+        this.pendingAction = null;
+      });
+    }
+    if (this.cancelPasswordBtn) {
+      this.cancelPasswordBtn.addEventListener('click', () => {
+        this.closeModal(this.passwordModal);
+        this.pendingAction = null;
+      });
+    }
+
     // 주소 복사 버튼
     if (this.copyUrlBtn && this.qrUrlInput) {
       this.copyUrlBtn.addEventListener('click', () => {
@@ -237,7 +283,7 @@ class BasketballLeaderboard {
     }
 
     // 배경 클릭 시 모달 닫기
-    [this.addModal, this.settingsModal, this.qrModal].forEach(modal => {
+    [this.addModal, this.settingsModal, this.qrModal, this.passwordModal].forEach(modal => {
       if (modal) {
         modal.addEventListener('click', (e) => {
           if (e.target === modal) this.closeModal(modal);
@@ -251,6 +297,7 @@ class BasketballLeaderboard {
         this.closeModal(this.addModal);
         this.closeModal(this.settingsModal);
         this.closeModal(this.qrModal);
+        this.closeModal(this.passwordModal);
       }
     });
 
@@ -343,9 +390,10 @@ class BasketballLeaderboard {
       }
     });
 
-    // 설정: 전체 삭제
-    this.clearAllDataBtn.addEventListener('click', async () => {
-      if (confirm('경고: 모든 명예의 전당 기록이 영구적으로 삭제됩니다. 계속하시겠습니까?')) {
+    // 설정: 전체 삭제 (관리자 비밀번호 필요)
+    this.clearAllDataBtn.addEventListener('click', () => {
+      this.closeModal(this.settingsModal);
+      this.requestAdminAuth('모든 참가자 및 점수 기록을 완전히 초기화하시겠습니까?', async () => {
         if (window.firebaseService && window.firebaseService.isConnected) {
           try {
             await window.firebaseService.clearAllScores();
@@ -360,8 +408,7 @@ class BasketballLeaderboard {
           this.render();
           this.showToast('모든 기록이 초기화되었습니다.', 'info');
         }
-        this.closeModal(this.settingsModal);
-      }
+      });
     });
 
     // Firebase 설정 저장 버튼
@@ -494,12 +541,30 @@ class BasketballLeaderboard {
     }
   }
 
-  // ================= 기록 삭제 처리 =================
-  async deleteRecord(id) {
+  // 관리자 비밀번호 인증 요청 모달 열기
+  requestAdminAuth(desc, onVerified) {
+    this.pendingAction = onVerified;
+    if (this.passwordActionDesc) {
+      this.passwordActionDesc.textContent = desc || '기록을 삭제하려면 관리자 비밀번호(1234)를 입력하세요.';
+    }
+    if (this.adminPasswordInput) {
+      this.adminPasswordInput.value = '';
+    }
+    if (this.passwordErrorMsg) {
+      this.passwordErrorMsg.style.display = 'none';
+    }
+    this.openModal(this.passwordModal);
+    setTimeout(() => {
+      if (this.adminPasswordInput) this.adminPasswordInput.focus();
+    }, 150);
+  }
+
+  // ================= 기록 삭제 처리 (관리자 비밀번호 필요) =================
+  deleteRecord(id) {
     const record = this.records.find(r => r.id === id);
     if (!record) return;
 
-    if (confirm(`'${record.name}' (${record.score}점) 선수의 기록을 삭제하시겠습니까?`)) {
+    this.requestAdminAuth(`'${record.name}' (${record.score}점) 선수의 기록을 삭제하시겠습니까?`, async () => {
       if (window.firebaseService && window.firebaseService.isConnected) {
         try {
           await window.firebaseService.deleteScore(id);
@@ -514,7 +579,7 @@ class BasketballLeaderboard {
         this.render();
         this.showToast('기록이 삭제되었습니다.', 'info');
       }
-    }
+    });
   }
 
   // ================= 렌더링 =================

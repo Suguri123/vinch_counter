@@ -353,6 +353,40 @@
     </div>
   </div>
 
+  <!-- 관리자 비밀번호 확인 모달 -->
+  <div class="modal-backdrop" id="passwordModal">
+    <div class="modal-card password-modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="icon">🔒</span>
+          <h3>관리자 비밀번호 확인</h3>
+        </div>
+        <button class="modal-close" id="closePasswordModalBtn">&times;</button>
+      </div>
+
+      <form id="passwordForm" class="modal-body password-modal-body">
+        <p class="password-guide-text" id="passwordActionDesc">
+          기록을 삭제하려면 관리자 비밀번호(4자리)를 입력하세요.
+        </p>
+
+        <div class="password-input-wrap">
+          <input type="password" id="adminPasswordInput" placeholder="비밀번호 입력" maxlength="12" autocomplete="off" required class="setting-input password-input">
+        </div>
+
+        <p class="password-error-msg" id="passwordErrorMsg" style="display: none;">
+          ⚠️ 비밀번호가 일치하지 않습니다. 다시 입력해주세요.
+        </p>
+
+        <div class="modal-actions" style="width: 100%; justify-content: center; gap: 12px; margin-top: 8px;">
+          <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">취소</button>
+          <button type="submit" class="btn btn-danger" id="confirmPasswordBtn">
+            <span>확인 및 삭제</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- 커스텀 알림/축하 토스트 & 팝업 컨테이너 -->
   <div id="toastContainer" class="toast-container"></div>
 
