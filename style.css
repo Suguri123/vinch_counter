@@ -153,15 +153,15 @@ body {
 
 .logo-icon-wrapper {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.25), rgba(0, 210, 255, 0.25));
   border: 1px solid rgba(255, 107, 0, 0.5);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 34px;
   box-shadow: 0 0 20px var(--primary-orange-glow);
 }
 
@@ -171,7 +171,7 @@ body {
 
 .ball-icon {
   position: absolute;
-  font-size: 16px;
+  font-size: 18px;
   bottom: -4px;
   right: -4px;
   animation: ballSpin 3s linear infinite;
@@ -188,12 +188,13 @@ body {
 }
 
 .logo-text h1 {
-  font-size: 1.65rem;
-  font-weight: 800;
+  font-size: 2.4rem;
+  font-weight: 900;
   letter-spacing: -0.5px;
   background: linear-gradient(90deg, #ffffff, #ffb366, #ff7a00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.2;
 }
 
 .subtitle-wrap {
@@ -201,12 +202,13 @@ body {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 .logo-text .sub-title {
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: var(--secondary-cyan);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
@@ -407,18 +409,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 28px;
 }
 
 .section-title-wrap h2 {
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 2.3rem;
+  font-weight: 900;
   letter-spacing: -0.5px;
 }
 
 .trophy-lead {
-  font-size: 1.8rem;
+  font-size: 2.6rem;
   animation: trophyWiggle 3s ease-in-out infinite;
 }
 
@@ -432,9 +434,9 @@ body {
   background: rgba(239, 68, 68, 0.18);
   color: #ff4d4f;
   border: 1px solid rgba(239, 68, 68, 0.4);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-full);
   letter-spacing: 0.8px;
   display: inline-flex;
@@ -727,21 +729,22 @@ body {
 .table-title {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .table-title h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 2.0rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .participant-count {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--secondary-cyan);
   background: rgba(0, 210, 255, 0.1);
   border: 1px solid rgba(0, 210, 255, 0.3);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
 }
 
@@ -1350,5 +1353,17 @@ body {
   .podium-pillar {
     height: 45px !important;
     font-size: 1.5rem;
+  }
+
+  .logo-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .section-title-wrap h2 {
+    font-size: 1.7rem;
+  }
+
+  .table-title h3 {
+    font-size: 1.45rem;
   }
 }
