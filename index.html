@@ -48,6 +48,9 @@
 
       <!-- 컨트롤 버튼들 -->
       <div class="header-actions">
+        <button id="qrBtn" class="btn btn-icon" title="스마트폰 접속 QR코드 열기">
+          <span class="icon">📱</span>
+        </button>
         <button id="soundToggleBtn" class="btn btn-icon" title="효과음 켜기/끄기">
           <span class="icon">🔊</span>
         </button>
@@ -311,6 +314,41 @@
 
       <div class="modal-actions">
         <button type="button" class="btn btn-secondary" id="closeSettingsBtn">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR 코드 모달 -->
+  <div class="modal-backdrop" id="qrModal">
+    <div class="modal-card qr-modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="icon">📱</span>
+          <h3>스마트폰 접속용 QR코드</h3>
+        </div>
+        <button class="modal-close" id="closeQrModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body qr-modal-body">
+        <p class="qr-guide-text">
+          스마트폰 기본 <strong>카메라 앱</strong>으로 아래 QR코드를 스캔하면<br>
+          점수 입력 페이지가 즉시 열립니다!
+        </p>
+        
+        <div class="qr-image-wrapper">
+          <img id="qrCodeImage" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=https://suguri123.github.io/vinch_counter/" alt="빈치봇 슈팅게임 접속 QR코드">
+        </div>
+
+        <div class="qr-url-box">
+          <input type="text" id="qrUrlInput" value="https://suguri123.github.io/vinch_counter/" readonly class="setting-input">
+          <button type="button" class="btn btn-primary" id="copyUrlBtn">
+            <span>주소 복사</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="closeQrBtn">닫기</button>
       </div>
     </div>
   </div>

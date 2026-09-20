@@ -22,12 +22,18 @@ class BasketballLeaderboard {
     // Modals
     this.addModal = document.getElementById('addModal');
     this.settingsModal = document.getElementById('settingsModal');
+    this.qrModal = document.getElementById('qrModal');
     this.openAddModalBtn = document.getElementById('openAddModalBtn');
     this.closeAddModalBtn = document.getElementById('closeAddModalBtn');
     this.cancelAddBtn = document.getElementById('cancelAddBtn');
     this.settingsBtn = document.getElementById('settingsBtn');
     this.closeSettingsModalBtn = document.getElementById('closeSettingsModalBtn');
     this.closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    this.qrBtn = document.getElementById('qrBtn');
+    this.closeQrModalBtn = document.getElementById('closeQrModalBtn');
+    this.closeQrBtn = document.getElementById('closeQrBtn');
+    this.copyUrlBtn = document.getElementById('copyUrlBtn');
+    this.qrUrlInput = document.getElementById('qrUrlInput');
 
     // Record Form Elements
     this.recordForm = document.getElementById('recordForm');
@@ -206,11 +212,37 @@ class BasketballLeaderboard {
     this.closeSettingsModalBtn.addEventListener('click', () => this.closeModal(this.settingsModal));
     this.closeSettingsBtn.addEventListener('click', () => this.closeModal(this.settingsModal));
 
-    // 배경 클릭 시 모달 닫기
-    [this.addModal, this.settingsModal].forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) this.closeModal(modal);
+    // QR 모달 제어
+    if (this.qrBtn) {
+      this.qrBtn.addEventListener('click', () => this.openModal(this.qrModal));
+    }
+    if (this.closeQrModalBtn) {
+      this.closeQrModalBtn.addEventListener('click', () => this.closeModal(this.qrModal));
+    }
+    if (this.closeQrBtn) {
+      this.closeQrBtn.addEventListener('click', () => this.closeModal(this.qrModal));
+    }
+
+    // 주소 복사 버튼
+    if (this.copyUrlBtn && this.qrUrlInput) {
+      this.copyUrlBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(this.qrUrlInput.value).then(() => {
+          this.showToast('웹사이트 주소가 클립보드에 복사되었습니다!', 'success');
+        }).catch(() => {
+          this.qrUrlInput.select();
+          document.execCommand('copy');
+          this.showToast('웹사이트 주소가 복사되었습니다!', 'success');
+        });
       });
+    }
+
+    // 배경 클릭 시 모달 닫기
+    [this.addModal, this.settingsModal, this.qrModal].forEach(modal => {
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) this.closeModal(modal);
+        });
+      }
     });
 
     // ESC 키로 모달 닫기
@@ -218,6 +250,7 @@ class BasketballLeaderboard {
       if (e.key === 'Escape') {
         this.closeModal(this.addModal);
         this.closeModal(this.settingsModal);
+        this.closeModal(this.qrModal);
       }
     });
 
