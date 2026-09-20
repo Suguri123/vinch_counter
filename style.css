@@ -123,11 +123,11 @@ body {
   z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 24px 32px;
+  padding: 14px 24px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 14px;
 }
 
 /* ================= 헤더 영역 ================= */
@@ -135,14 +135,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px;
+  padding: 10px 20px;
   background: var(--bg-card);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
 }
 
 .logo-area {
@@ -392,7 +392,7 @@ body {
 .dashboard-main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 14px;
 }
 
 /* ================= TOP 3 포디움 영역 ================= */
@@ -401,7 +401,7 @@ body {
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 30px 24px 20px;
+  padding: 14px 20px 10px;
   box-shadow: var(--shadow-lg);
 }
 
@@ -409,18 +409,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .section-title-wrap h2 {
-  font-size: 2.3rem;
+  font-size: 2.0rem;
   font-weight: 900;
   letter-spacing: -0.5px;
 }
 
 .trophy-lead {
-  font-size: 2.6rem;
+  font-size: 2.2rem;
   animation: trophyWiggle 3s ease-in-out infinite;
 }
 
@@ -434,9 +434,9 @@ body {
   background: rgba(239, 68, 68, 0.18);
   color: #ff4d4f;
   border: 1px solid rgba(239, 68, 68, 0.4);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: var(--radius-full);
   letter-spacing: 0.8px;
   display: inline-flex;
@@ -464,13 +464,13 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 20px;
-  padding: 20px 10px 0;
+  gap: 16px;
+  padding: 0;
 }
 
 .podium-item {
   flex: 1;
-  max-width: 320px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -479,7 +479,7 @@ body {
 }
 
 .podium-item:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
 .podium-card {
@@ -487,28 +487,28 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  padding: 24px 18px 20px;
+  padding: 10px 12px 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   position: relative;
   backdrop-filter: blur(12px);
 }
 
 .rank-badge {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 900;
-  padding: 6px 18px;
+  padding: 3px 12px;
   border-radius: var(--radius-full);
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
 }
 
 .medal-icon {
-  font-size: 4.2rem;
-  margin: 4px 0;
+  font-size: 3.2rem;
+  margin: 0;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
   animation: medalGlow 2.5s ease-in-out infinite;
 }
@@ -518,34 +518,8 @@ body {
   50% { transform: scale(1.06); }
 }
 
-.player-avatar {
-  width: 72px;
-  height: 56px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 4px 0;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  overflow: hidden;
-  padding: 2px;
-}
-
-.player-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.vincibot-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .player-name {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #ffffff;
   max-width: 90%;
@@ -555,7 +529,7 @@ body {
 }
 
 .player-score {
-  font-size: 2.4rem;
+  font-size: 2.0rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
   display: flex;
@@ -564,21 +538,21 @@ body {
 }
 
 .player-score .unit {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-sub);
 }
 
 .player-date {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
 }
 
 .player-comment {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-sub);
   background: rgba(0, 0, 0, 0.25);
-  padding: 5px 12px;
+  padding: 2px 8px;
   border-radius: var(--radius-sm);
   max-width: 95%;
   overflow: hidden;
@@ -594,11 +568,11 @@ body {
   justify-content: center;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   font-weight: 900;
-  font-size: 5.0rem;
+  font-size: 3.2rem;
   color: rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .podium-pillar::before {
@@ -607,7 +581,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.3);
 }
 
@@ -620,22 +594,22 @@ body {
 .podium-first .podium-card {
   background: linear-gradient(180deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 107, 0, 0.08) 100%);
   border: 2px solid var(--gold);
-  box-shadow: 0 0 35px var(--gold-glow);
-  padding-top: 32px;
+  box-shadow: 0 0 25px var(--gold-glow);
+  padding-top: 18px;
 }
 
 .crown-glow {
   position: absolute;
-  top: -28px;
-  font-size: 2.4rem;
+  top: -18px;
+  font-size: 1.8rem;
   z-index: 10;
   animation: crownFloat 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
 }
 
 @keyframes crownFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-4px); }
 }
 
 .rank-1 {
@@ -645,32 +619,24 @@ body {
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
 }
 
-.avatar-first {
-  width: 88px;
-  height: 68px;
-  border-color: var(--gold);
-  box-shadow: 0 0 25px var(--gold-glow);
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 0, 0.2));
-}
-
 .first-name {
-  font-size: 1.65rem;
+  font-size: 1.4rem;
   color: #fff9e6;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .first-score {
-  font-size: 3.2rem;
+  font-size: 2.6rem;
   color: var(--gold);
   text-shadow: 0 0 15px var(--gold-glow);
 }
 
 .pillar-1 {
-  height: 165px;
+  height: 80px;
   background: linear-gradient(180deg, rgba(255, 215, 0, 0.35) 0%, rgba(255, 107, 0, 0.15) 100%);
   border: 2px solid var(--gold);
   border-top: none;
-  box-shadow: 0 15px 30px var(--gold-glow);
+  box-shadow: 0 10px 20px var(--gold-glow);
 }
 
 /* 2위 스타일 */
@@ -681,7 +647,7 @@ body {
 .podium-second .podium-card {
   background: linear-gradient(180deg, rgba(224, 224, 224, 0.1) 0%, rgba(100, 116, 139, 0.05) 100%);
   border: 1.5px solid var(--silver);
-  box-shadow: 0 0 20px var(--silver-glow);
+  box-shadow: 0 0 15px var(--silver-glow);
 }
 
 .rank-2 {
@@ -694,7 +660,7 @@ body {
 }
 
 .pillar-2 {
-  height: 120px;
+  height: 55px;
   background: linear-gradient(180deg, rgba(224, 224, 224, 0.25) 0%, rgba(100, 116, 139, 0.1) 100%);
   border: 1.5px solid var(--silver);
   border-top: none;
@@ -708,7 +674,7 @@ body {
 .podium-third .podium-card {
   background: linear-gradient(180deg, rgba(205, 127, 50, 0.1) 0%, rgba(100, 116, 139, 0.05) 100%);
   border: 1.5px solid var(--bronze);
-  box-shadow: 0 0 20px var(--bronze-glow);
+  box-shadow: 0 0 15px var(--bronze-glow);
 }
 
 .rank-3 {
@@ -721,7 +687,7 @@ body {
 }
 
 .pillar-3 {
-  height: 90px;
+  height: 38px;
   background: linear-gradient(180deg, rgba(205, 127, 50, 0.25) 0%, rgba(100, 116, 139, 0.1) 100%);
   border: 1.5px solid var(--bronze);
   border-top: none;
@@ -733,7 +699,7 @@ body {
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 16px 20px;
   box-shadow: var(--shadow-lg);
 }
 
@@ -741,9 +707,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
 }
 
 .table-title {
@@ -827,7 +793,7 @@ body {
 
 .ranking-table th {
   background: rgba(0, 0, 0, 0.4);
-  padding: 14px 18px;
+  padding: 10px 16px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-sub);
@@ -837,7 +803,7 @@ body {
 }
 
 .ranking-table td {
-  padding: 16px 18px;
+  padding: 10px 16px;
   font-size: 0.95rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: middle;
@@ -852,7 +818,7 @@ body {
 }
 
 .th-rank, .td-rank {
-  width: 100px;
+  width: 90px;
   text-align: center;
 }
 
@@ -860,11 +826,11 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   font-weight: 900;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   background: rgba(255, 255, 255, 0.07);
   color: var(--text-sub);
 }
