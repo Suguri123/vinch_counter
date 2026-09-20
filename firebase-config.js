@@ -1,22 +1,25 @@
 // Firebase Configuration for Vinci Counter
-// Firebase 콘솔(https://console.firebase.google.com/)에서 프로젝트 생성 후 
-// 웹 앱(</>)을 추가하여 발급받은 설정값을 여기에 입력하거나 웹사이트의 설정(⚙️) 메뉴에서 입력할 수 있습니다.
+// 프로젝트: vinci-counter
 
 const defaultFirebaseConfig = {
-  apiKey: "YOUR_API_KEY_HERE",
+  apiKey: "AIzaSyCHXLfgEbRB8B3ZBhfJVDi_78XHBLp4ueM",
   authDomain: "vinci-counter.firebaseapp.com",
   projectId: "vinci-counter",
-  storageBucket: "vinci-counter.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID_HERE"
+  storageBucket: "vinci-counter.firebasestorage.app",
+  messagingSenderId: "723315746373",
+  appId: "1:723315746373:web:0ed886563a47b3e50f252c",
+  measurementId: "G-02YENGJ1J4"
 };
 
-// 로컬 저장소에 저장된 설정이 있다면 우선 사용
+// 로컬 저장소에 커스텀 설정이 있다면 우선 사용, 없으면 위 기본 설정 사용
 function getFirebaseConfig() {
   try {
     const saved = localStorage.getItem('vincibot_firebase_config');
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      if (parsed.apiKey && parsed.apiKey !== 'YOUR_API_KEY_HERE') {
+        return parsed;
+      }
     }
   } catch (e) {
     console.warn('Firebase 설정 로드 실패:', e);
